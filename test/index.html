@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0014)about:internet -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>jQuery Format Tests</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <link type="text/css" href="testsuite.css" rel="stylesheet" />
+        <script type="text/javascript" src="jquery-1.3.2.min.js"></script>
+        <script type="text/javascript" src="jquery.format-1.0.min.js"></script>
+        <script type="text/javascript" src="testrunner.js"></script>
+        <script type="text/javascript">
+        /*<![CDATA[*/
+
+            module("Dates");
+            
+            test("Basic requirements", function() {
+                
+                var d = new Date();
+                var f = 'MMMM dd, yyyy KK:mm:ss:SSS a';
+                var df = $.format.date(d, f);
+                equals(d.getTime(), $.format.date(df, f).getTime());
+                
+                f = 'dd.MM.yyyy';
+                df = $.format.date('1.5.2009', f);
+                d = new Date(df);
+                equals('01.05.2009', $.format.date(d, f)); 
+                               
+            });
+            
+            module("Number");
+            
+            test("Basic requirements", function() {
+                
+            	equals('0.1230', $.format.number(0.123, '#0.0000'));
+            	equals('7,456.2', $.format.number(7456.2, '#,##0.0#'));
+            	equals('7,456.4', $.format.number(7456.351, '#,##0.#'));
+            	equals('123.40', $.format.number(123.4, '#,##0.00#'));
+                equals('12.3241', $.format.number(12.32410, '#,##0.0000#'));
+                equals('0.12321', $.format.number(0.123213, '#,##0.00###'));
+                equals('2,101', $.format.number(2101.234, '#,###'));
+                equals('102', $.format.number(101.7, '#,###'));
+                equals('.1230', $.format.number(0.123, '.0000'));
+                equals('.16', $.format.number(5.155, '.0#'));
+                equals('540', $.format.number(540.23, '###'));
+                equals('540', $.format.number(540.23, '###.'));
+                equals('540', $.format.number(540, '###.##'));
+                equals('19.03', $.format.number(19.03));
+                equals('05.0303', $.format.number(5.0303, '00.0000'));
+
+                equals('23,540.23', $.format.number(23540.23, '#,###.##'));
+                equals('23,540', $.format.number(23540.23, '#,###'));
+                equals('23540.230', $.format.number(23540.23, '#####.000'));
+                equals('03.1', $.format.number(3.14, '#00.#'));
+                equals('10.9', $.format.number(10.9, '#,##0.0#'));
+
+                equals(0.123, $.format.number('.1230'));
+                equals(86.02, $.format.number('86.02'));
+                equals(3.14, $.format.number('03.14'));
+
+                $.format.locale({
+                    number: {
+                        groupingSeparator: '.',
+                        decimalSeparator: ','
+                    }
+                });
+                
+                equals('123,400', $.format.number(123.4, '#,##0.000'));
+                equals('12,3241', $.format.number(12.32410, '#,##0.0000#'));
+                equals('2.123,400', $.format.number(2123.4, '#,##0.000'));
+                equals('1.231.231.212,3241', $.format.number(1231231212.32410, '#,##0.0000#'));
+                
+                equals(1231231212.3241, $.format.number('1.231.231.212,3241'));
+                equals(18.005, $.format.number('18,00.5'));
+                
+                $.format.locale({
+                    number: {
+                        groupingSeparator: '\'',
+                        decimalSeparator: '.'
+                    }
+                });
+                
+                equals('123.400', $.format.number(123.4, '#,##0.000'));
+                equals('12.3241', $.format.number(12.32410, '#,##0.0000#'));
+                equals("2'123.400", $.format.number(2123.4, '#,##0.000'));
+                equals("1'231'231'212.3241", $.format.number(1231231212.32410, '#,##0.0000#'));
+                
+                equals(1231231212.3241, $.format.number("1'231'231'212.3241"));
+                equals(18.005, $.format.number("18.00'5"));
+                
+            });            
+        /*]]>*/
+        </script>
+    </head>
+    <body>
+        <h1>jQuery Format Tests</h1>
+        <h2 id="banner"></h2>
+        <h2 id="userAgent"></h2>
+        <ol id="tests"></ol>
+        <div id="main"></div>
+        <div id="test" style="display:none;"></div>
+    </body>
+</html>
