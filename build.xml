@@ -10,7 +10,7 @@
 
     <target name="release">
         <antcall target="dist" />
-        <antcall target="samples" />
+        <antcall target="test" />
         <antcall target="bundle" />
     </target>
 
@@ -19,9 +19,6 @@
             <fileset dir="${dist.dir}">
                 <include name="**/*" />
             </fileset>            
-            <fileset dir="${basedir}">
-                <include name="${samples.dir}/**/*" />
-            </fileset>
         </copy>
         <zip destfile="./../${name}-${version}.zip"
             basedir="${basedir}" 
@@ -62,29 +59,21 @@
         <move file="${file}.js" tofile="${file}-${version}.js" />
     </target>
     
-    <target name="compress">
-    	<for list="1,2,3,4,5,6,7,8,9,10,11" param="num">
-            <sequential>
-                <replaceregexp match="((^/\*)|(^ \*/)|(^ \*((?!\r|\n).)*))" flags="m" 
-                    file="${file}">
-                    <substitution expression="license = '\1';"/>
-                </replaceregexp>
-            </sequential>
-        </for>
+	<target name="compress">
+        <replaceregexp match="/\*" file="${file}">
+            <substitution expression="/*!" />
+        </replaceregexp>
         <java jar="${lib.dir}/yuicompressor.jar"
             failonerror="true" fork="true">
             <arg line="${file} -o ${file} --charset utf-8" />
         </java>
-        <replaceregexp match="(\r|\n)*" flags="gm" file="${file}">
-            <substitution expression=""/>
-        </replaceregexp>
-        <replaceregexp match="license=&#34;(((?!&#34;).)*)&#34;;" flags="gm" 
-            file="${file}">
-            <substitution expression="\1&#13;"/>
-        </replaceregexp>
     </target>
-    
-    <target name="samples">
+	
+    <target name="test">
+        <delete>
+            <fileset dir="${test.dir}" includes="${name}-\d.\d+.min.js" />
+        </delete>
+        <copy file="${dist.dir}/${name}-${version}.min.js" todir="${test.dir}" overwrite="true" />
     </target>
     
 </project>
