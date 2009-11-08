@@ -42,7 +42,6 @@
 	        		for (var p in value) {
 	            		for (var v in value[p]) {
 	        				locale[p][v] = value[p][v];
-	            			console.info(locale[p][v] + '::' + value[p][v]);
 	            		}
 	        		}
         		}

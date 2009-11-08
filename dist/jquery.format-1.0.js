@@ -7,7 +7,7 @@
  * Dual licensed under the MIT and GPL licenses.
  * http://docs.jquery.com/License
  *
- * Date: 2009-10-13 01:25:21 +0300 (Tue, 13 Oct 2009)
+ * Date: 2009-11-08 22:18:32 +0200 (Sun, 08 Nov 2009)
  */
 (function ($) {
 
@@ -42,7 +42,6 @@
 	        		for (var p in value) {
 	            		for (var v in value[p]) {
 	        				locale[p][v] = value[p][v];
-	            			console.info(locale[p][v] + '::' + value[p][v]);
 	            		}
 	        		}
         		}
