@@ -23,18 +23,42 @@
                 f = 'dd.MM.yyyy';
                 df = $.format.date('1.5.2009', f);
                 d = new Date(df);
-                equals('01.05.2009', $.format.date(d, f)); 
-                               
+                equals('01.05.2009', $.format.date(d, f));
+                       
+                $.format.locale({
+                    date: {
+                        format: 'EEEE, \'o\'\'clock\' dd\' de \'MMMM\' de \'yyyy H:mm:ss',
+                        monthsFull: ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'],
+                        monthsShort: ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'],
+                        daysFull: ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'],
+                        daysShort: ['dom','lun','mar','mié','jue','vie','sáb'],
+                        timeFormat: 'H:mm:ss',
+                        shortDateFormat: 'dd/MM/yyyy',
+                        longDateFormat: 'EEEE, dd\' de \'MMMM\' de \'yyyy'
+                    }
+                });
+
+                d = new Date();
+                d.setYear(1976);
+                d.setMonth(4);
+                d.setDate(31);
+                d.setHours(3);
+                d.setMinutes(20);
+                d.setSeconds(43);
+                d.setMilliseconds(0);
+
+                equals('lunes, o\'clock 31 de mayo de 1976 3:20:43', $.format.date(d));
+                
             });
             
             module("Number");
             
             test("Basic requirements", function() {
                 
-            	equals('0.1230', $.format.number(0.123, '#0.0000'));
-            	equals('7,456.2', $.format.number(7456.2, '#,##0.0#'));
-            	equals('7,456.4', $.format.number(7456.351, '#,##0.#'));
-            	equals('123.40', $.format.number(123.4, '#,##0.00#'));
+                equals('0.1230', $.format.number(0.123, '#0.0000'));
+                equals('7,456.2', $.format.number(7456.2, '#,##0.0#'));
+                equals('7,456.4', $.format.number(7456.351, '#,##0.#'));
+                equals('123.40', $.format.number(123.4, '#,##0.00#'));
                 equals('12.3241', $.format.number(12.32410, '#,##0.0000#'));
                 equals('0.12321', $.format.number(0.123213, '#,##0.00###'));
                 equals('2,101', $.format.number(2101.234, '#,###'));
