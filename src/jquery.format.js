@@ -16,7 +16,7 @@
         var UNDEFINED = 'undefined',
             TRUE = true,
             FALSE = false,
-            locale = {
+            _locale = {
                 date: {
                     format: 'dddd, MMMM dd, yyyy h:mm:ss tt',
                     monthsFull: ['January','February','March','April','May','June','July','August','September','October','November','December'],
@@ -41,11 +41,11 @@
                 if (value) {
                     for (var p in value) {
                         for (var v in value[p]) {
-                            locale[p][v] = value[p][v];
+                            _locale[p][v] = value[p][v];
                         }
                     }
                 }
-                return locale;
+                return _locale;
             },
             
             date: function(value, format) {
@@ -53,37 +53,35 @@
                 if (typeof value == 'string') {
                     
                     var getNumber = function (str, p, minlength, maxlength) {
-                
                         for (var x = maxlength; x >= minlength; x--) {
                             var token = str.substring(p, p + x);
                             if (token.length >= minlength && (new RegExp(/^\d+$/)).test(token)) {
                                 return token;
                             }
                         }
-                        
                         return null;
-                    }
+                    };
                     
                     if (typeof format == UNDEFINED)
-                        format = locale.date.format;
+                        format = _locale.date.format;
                             
-                    var _strict = false;
-                    var i = 0;
-                    var pos = 0;
-                    var c = '';
-                    var token = '';
-                    var x, y;
-                
-                    var now = new Date();
-                    var year = now.getYear();
-                    var month = now.getMonth() + 1;
-                    var date = 1;
-                    var hh = now.getHours();
-                    var mm = now.getMinutes();
-                    var ss = now.getSeconds();
-                    var SSS = now.getMilliseconds();
-                    var ampm = '';
-                        
+                    var _strict = false,
+                    	i = 0,
+                    	pos = 0,
+                    	c = '',
+                    	token = '',
+                    	x, 
+                    	y,
+	                    now = new Date(),
+	                    year = now.getYear(),
+	                    month = now.getMonth() + 1,
+	                    date = 1,
+	                    hh = now.getHours(),
+	                    mm = now.getMinutes(),
+	                    ss = now.getSeconds(),
+	                    SSS = now.getMilliseconds(),
+	                    ampm = '';
+                    
                     while (i < format.length) {
                         token = '';
                         c = format.charAt(i);
@@ -124,7 +122,7 @@
                             }
                         } else if (token == 'MMMM'){
                             month = 0;
-                            for (var j = 0, monthName; monthName = locale.date.monthsFull[j]; j++) {
+                            for (var j = 0, monthName; monthName = _locale.date.monthsFull[j]; j++) {
                                 if (value.substring(pos, pos + monthName.length).toLowerCase() == monthName.toLowerCase()) {
                                     month = j + 1;
                                     pos += monthName.length;
@@ -136,7 +134,7 @@
                             }
                         } else if (token == 'MMM'){
                             month = 0;
-                            for (var j = 0, monthName; monthName = locale.date.monthsShort[j]; j++) {
+                            for (var j = 0, monthName; monthName = _locale.date.monthsShort[j]; j++) {
                                 if (value.substring(pos, pos + monthName.length).toLowerCase() == monthName.toLowerCase()) {
                                     month = j + 1;
                                     pos += monthName.length;
@@ -147,14 +145,14 @@
                                 return 0;
                             }
                         } else if (token == 'EEEE'){
-                            for (var j = 0, dayName; dayName = locale.date.daysFull[j]; j++) {
+                            for (var j = 0, dayName; dayName = _locale.date.daysFull[j]; j++) {
                                 if (value.substring(pos, pos + dayName.length).toLowerCase() == dayName.toLowerCase()) {
                                     pos += dayName.length;
                                     break;
                                 }
                             }        
                         } else if (token == 'EEE'){
-                            for (var j = 0, dayName; dayName = locale.date.daysShort[j]; j++) {
+                            for (var j = 0, dayName; dayName = _locale.date.daysShort[j]; j++) {
                                 if (value.substring(pos, pos + dayName.length).toLowerCase() == dayName.toLowerCase()) {
                                     pos += dayName.length;
                                     break;
@@ -277,7 +275,7 @@
                     }
                     
                     if (typeof format == UNDEFINED) {
-                        format = locale.date.format;
+                        format = _locale.date.format;
                     }
                     
                     var y = value.getYear();
@@ -299,12 +297,12 @@
                     value['yy'] = String(y).substring(2, 4);
                     value['M'] = M;
                     value['MM'] = formatNumber(M);
-                    value['MMM'] = locale.date.monthsShort[M-1];
-                    value['MMMM'] = locale.date.monthsFull[M-1];
+                    value['MMM'] = _locale.date.monthsShort[M-1];
+                    value['MMMM'] = _locale.date.monthsFull[M-1];
                     value['d'] = d;
                     value['dd'] = formatNumber(d);
-                    value['EEE'] = locale.date.daysShort[E];
-                    value['EEEE'] = locale.date.daysFull[E];
+                    value['EEE'] = _locale.date.daysShort[E];
+                    value['EEEE'] = _locale.date.daysFull[E];
                     value['H'] = H;
                     value['HH'] = formatNumber(H);
                     
@@ -384,10 +382,10 @@
                 
                 if (typeof value == 'string') {
                     
-                    var groupingSeparator = locale.number.groupingSeparator;
-                    var decimalSeparator = locale.number.decimalSeparator;
-                    var decimalIndex = value.indexOf(decimalSeparator);
-                    var roundFactor = 1;
+                    var groupingSeparator = _locale.number.groupingSeparator,
+                    	decimalSeparator = _locale.number.decimalSeparator,
+                    	decimalIndex = value.indexOf(decimalSeparator),
+                    	roundFactor = 1;
                 
                     if (decimalIndex != -1) {
                         roundFactor = Math.pow(10, value.length - decimalIndex - 1);
@@ -401,27 +399,26 @@
                 } else {
                     
                     if (typeof format == UNDEFINED || format.length < 1) {
-                        format = locale.number.format;
+                        format = _locale.number.format;
                     }
                     
-                    var integer = '';
-                    var fraction = '';
-                    
-                    var groupingSeparator = ',';
-                    var groupingIndex = format.lastIndexOf(groupingSeparator);
-
-                    var decimalSeparator = '.';
-                    var decimalIndex = format.indexOf(decimalSeparator);
+                    var integer = '',
+                    	fraction = '',
+                    	groupingSeparator = ',',
+                    	groupingIndex = format.lastIndexOf(groupingSeparator),
+                    	decimalSeparator = '.',
+                    	decimalIndex = format.indexOf(decimalSeparator);
         
                     if (decimalIndex != -1) {
-                        var fraction = locale.number.decimalSeparator;
-                        var minFraction = format.substr(decimalIndex + 1).replace(/#/g, '').length;
-                        var maxFraction = format.substr(decimalIndex + 1).length;
+                        var fraction = _locale.number.decimalSeparator,
+                        	minFraction = format.substr(decimalIndex + 1).replace(/#/g, '').length,
+                        	maxFraction = format.substr(decimalIndex + 1).length;
                         if (maxFraction > 0) {
-                            var powFraction = Math.pow(10, maxFraction);
-                            var roundFactor = 1000;
-                            var tempFraction = String(Math.round(parseInt(value * powFraction * roundFactor - parseInt(value) * powFraction * roundFactor) / roundFactor));
-                            var parts = value.toString().split('.');
+                            var powFraction = Math.pow(10, maxFraction),
+                            	roundFactor = 1000,
+                            	tempFraction = String(Math.round(parseInt(value * powFraction * roundFactor - 
+                            			parseInt(value) * powFraction * roundFactor) / roundFactor)),
+                            	parts = value.toString().split('.');
                             if (typeof parts[1] != UNDEFINED) {
                                 for (var i = 0; i < parts[1].length; i++) {
                                     if (parts[1].substr(i, 1) == '0') {
@@ -434,7 +431,8 @@
                             for (var i = 0; i < (maxFraction - fraction.length); i++) {
                                 tempFraction += '0';
                             }
-                            var symbol, formattedFraction = '';
+                            var symbol, 
+                            	formattedFraction = '';
                             for (var i = 0; i < tempFraction.length; i++) {
                                 symbol = tempFraction.substr(i, 1);
                                 if (i >= minFraction && symbol == '0') {
@@ -444,7 +442,7 @@
                             }
                             fraction += formattedFraction;
                         }
-                        if (fraction == locale.number.decimalSeparator) {
+                        if (fraction == _locale.number.decimalSeparator) {
                             fraction = '';
                         }
                     }
@@ -455,8 +453,8 @@
                         } else {
                             integer = String(Math.round(value));
                         }
-                        var grouping = locale.number.groupingSeparator;
-                        var groupingSize = 0;
+                        var grouping = _locale.number.groupingSeparator,
+                        	groupingSize = 0;
                         if (groupingIndex != -1) {
                             if (decimalIndex != -1) {
                                 groupingSize = decimalIndex - groupingIndex;
@@ -466,8 +464,9 @@
                             groupingSize--;
                         }
                         if (groupingSize > 0) {
-                            var count = 0, formattedInteger = '';
-                            var i = integer.length;
+                            var count = 0, 
+                            	formattedInteger = '',
+                            	i = integer.length;
                             while (i--) {
                                 if (count != 0 && count % groupingSize == 0) {
                                     formattedInteger = grouping + formattedInteger;    
