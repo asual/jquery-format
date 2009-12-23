@@ -18,7 +18,10 @@
         <copy todir="${name}-${version}">
             <fileset dir="${dist.dir}">
                 <include name="**/*" />
-            </fileset>            
+            </fileset>
+            <fileset dir="${basedir}">
+                <include name="${test.dir}/**/*" />
+            </fileset>
         </copy>
         <zip destfile="./../${name}-${version}.zip"
             basedir="${basedir}" 
