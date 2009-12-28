@@ -1,0 +1,41 @@
+jQuery Format
+=============
+
+The jQuery Format plugin enables the formatting and parsing of dates and numbers. It's a 
+client-side alternative of the popular 
+[SimpleDateFormat](http://java.sun.com/javase/6/docs/api/java/text/SimpleDateFormat.html) 
+and [NumberFormat](http://java.sun.com/javase/6/docs/api/java/text/NumberFormat.html) APIs.
+
+Usage
+-----
+
+Formatting dates and numbers is as easy as the following:
+
+    $.format.date(new Date(), 'MMMM dd, yyyy KK:mm:ss:SSS a');
+    $.format.number(7456.2, '#,##0.00#');
+    
+Parsing is very similar to the formatting but works with strings as a first parameter:
+
+    $.format.date('1.5.2009', 'dd.MM.yyyy');
+    $.format.number('1.231.231.212,3241');
+    
+The second format parameter is always optional and by default the plugin uses the formats 
+of the en_US locale. The locale can be globally configured using the following:
+
+    $.format.locale({
+        date: {
+            format: 'dddd, MMMM dd, yyyy h:mm:ss tt',
+            monthsFull: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+            monthsShort: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+            daysFull: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
+            daysShort: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
+            timeFormat: 'h:mm tt',
+            shortDateFormat: 'M/d/yyyy',
+            longDateFormat: 'dddd, MMMM dd, yyyy'
+        },
+        number: {
+            format: '#,##0.0#',
+            groupingSeparator: ',',
+            decimalSeparator: '.'
+        }    
+    });
