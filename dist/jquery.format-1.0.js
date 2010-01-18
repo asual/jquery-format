@@ -2,12 +2,12 @@
  * jQuery Format Plugin v1.0
  * http://www.asual.com/jquery/format/
  *
- * Copyright (c) 2009 Rostislav Hristov
+ * Copyright (c) 2009-2010 Rostislav Hristov
  * Uses code by Matt Kruse
  * Dual licensed under the MIT and GPL licenses.
  * http://docs.jquery.com/License
  *
- * Date: 2009-12-23 14:25:22 +0200 (Wed, 23 Dec 2009)
+ * Date: 2010-01-18 23:10:46 +0200 (Mon, 18 Jan 2010)
  */
 (function ($) {
 
