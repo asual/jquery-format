@@ -435,7 +435,7 @@
                             	formattedFraction = '';
                             for (var i = 0; i < tempFraction.length; i++) {
                                 symbol = tempFraction.substr(i, 1);
-                                if (i >= minFraction && symbol == '0') {
+                                if (i >= minFraction && symbol == '0' && /^0*$/.test(tempFraction.substr(i+1))) {
                                     break;
                                 }
                                 formattedFraction += symbol;
