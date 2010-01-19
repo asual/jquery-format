@@ -416,8 +416,10 @@
                         if (maxFraction > 0) {
                             var powFraction = Math.pow(10, maxFraction),
                             	roundFactor = 1000,
-                            	tempFraction = String(Math.round(parseInt(value * powFraction * roundFactor - 
-                            			parseInt(value) * powFraction * roundFactor) / roundFactor)),
+                                tempRound = Math.round(parseInt(value * powFraction * roundFactor - 
+                                        Math.round(value) * powFraction * roundFactor) / roundFactor),
+                                tempFraction = String(tempRound < 0 ? Math.round(parseInt(value * powFraction * roundFactor - 
+                                        parseInt(value) * powFraction * roundFactor) / roundFactor) : tempRound),
                             	parts = value.toString().split('.');
                             if (typeof parts[1] != UNDEFINED) {
                                 for (var i = 0; i < parts[1].length; i++) {
