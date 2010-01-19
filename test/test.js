@@ -17,8 +17,8 @@ test("Basic requirements", function() {
             format: 'EEEE, \'o\'\'clock\' dd\' de \'MMMM\' de \'yyyy H:mm:ss',
             monthsFull: ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'],
             monthsShort: ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'],
-            daysFull: ['domingo','lunes','martes','miŽrcoles','jueves','viernes','s‡bado'],
-            daysShort: ['dom','lun','mar','miŽ','jue','vie','s‡b'],
+            daysFull: ['domingo','lunes','martes','miï¿½rcoles','jueves','viernes','sï¿½bado'],
+            daysShort: ['dom','lun','mar','miï¿½','jue','vie','sï¿½b'],
             timeFormat: 'H:mm:ss',
             shortDateFormat: 'dd/MM/yyyy',
             longDateFormat: 'EEEE, dd\' de \'MMMM\' de \'yyyy'
@@ -64,6 +64,10 @@ test("Basic requirements", function() {
     equals($.format.number(3.14, '#00.#'), '03.1');
     equals($.format.number(10.9, '#,##0.0#'), '10.9');
 
+    equals($.format.number(1.02, "#.##"), '1.02');
+    equals($.format.number(1.12, "#.##"), '1.12');
+    equals($.format.number(1.999, "#.##"), '2');
+    
     equals($.format.number('.1230'), 0.123);
     equals($.format.number('86.02'), 86.02);
     equals($.format.number('03.14'), 3.14);
