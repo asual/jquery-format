@@ -272,7 +272,7 @@
                             }
                             return n;
                         }
-                    }
+                    };
                     
                     if (typeof format == UNDEFINED) {
                         format = _locale.date.format;
