@@ -2,7 +2,7 @@
  * jQuery Format Plugin v1.1
  * http://www.asual.com/jquery/format/
  *
- * Copyright (c) 2009 Rostislav Hristov
+ * Copyright (c) 2009-2010 Rostislav Hristov
  * Uses code by Matt Kruse
  * Dual licensed under the MIT and GPL licenses.
  * http://docs.jquery.com/License
