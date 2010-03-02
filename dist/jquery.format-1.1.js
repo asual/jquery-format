@@ -4,10 +4,10 @@
  *
  * Copyright (c) 2009-2010 Rostislav Hristov
  * Uses code by Matt Kruse
- * Dual licensed under the MIT and GPL licenses.
- * http://docs.jquery.com/License
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
  *
- * Date: 2010-01-19 13:04:08 +0200 (Tue, 19 Jan 2010)
+ * Date: 2010-03-02 09:34:19 +0200 (Tue, 02 Mar 2010)
  */
 (function ($) {
 
