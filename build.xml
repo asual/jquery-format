@@ -34,6 +34,10 @@
         <delete includeemptydirs="true">
             <fileset dir="${dist.dir}" includes="**/*" />
         </delete>
+        <echo message="Validating files..." />
+        <antcall target="validate">
+            <param name="file" value="${src.dir}/${name}" />
+        </antcall>
         <echo message="Copying files..." />
         <copy todir="${dist.dir}">
             <fileset dir="${src.dir}"/>
@@ -46,6 +50,14 @@
         <antcall target="compress">
             <param name="file" value="${dist.dir}/${name}-${version}.min.js" />
         </antcall>
+    </target>
+    
+    <target name="validate">
+        <java classpath="lib/js.jar" 
+            classname="org.mozilla.javascript.tools.shell.Main"
+            failonerror="true" fork="true">
+            <arg line="${lib.dir}/rhino.js ${file}.js" />
+        </java>
     </target>
     
     <target name="process">
@@ -62,16 +74,25 @@
         <move file="${file}.js" tofile="${file}-${version}.js" />
     </target>
     
-	<target name="compress">
-        <replaceregexp match="/\*" file="${file}">
-            <substitution expression="/*!" />
-        </replaceregexp>
-        <java jar="${lib.dir}/yuicompressor.jar"
+    <target name="compress">
+        <java jar="${lib.dir}/compiler.jar"
             failonerror="true" fork="true">
-            <arg line="${file} -o ${file} --charset utf-8" />
+            <arg line="--js=${file} --js_output_file=${file}.tmp" />
         </java>
+        <concat destfile="${file}.lic">
+            <filelist files="${file}" />
+            <filterchain>
+                <headfilter lines="11" />
+            </filterchain>
+        </concat>
+        <concat destfile="${file}">
+            <filelist files="${file}.lic,${file}.tmp" />
+        </concat>
+        <delete>
+            <filelist files="${file}.lic,${file}.tmp" />
+        </delete>
     </target>
-	
+    
     <target name="test">
         <delete>
             <fileset dir="${test.dir}" includes="${name}-\d.\d+.min.js" />
