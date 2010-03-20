@@ -7,7 +7,7 @@
  * Dual licensed under the MIT or GPL Version 2 licenses.
  * http://jquery.org/license
  *
- * Date: 2010-03-02 09:34:19 +0200 (Tue, 02 Mar 2010)
+ * Date: 2010-03-20 22:17:09 +0200 (Sat, 20 Mar 2010)
  */
 (function ($) {
 
@@ -50,6 +50,14 @@
             
             date: function(value, format) {
 
+                var i = 0,
+                    j = 0,
+                    l = 0,
+                    c = '',
+                    token = '',
+                    x,
+                    y;
+                
                 if (typeof value == 'string') {
                     
                     var getNumber = function (str, p, minlength, maxlength) {
@@ -62,25 +70,23 @@
                         return null;
                     };
                     
-                    if (typeof format == UNDEFINED)
+                    if (typeof format == UNDEFINED) {
                         format = _locale.date.format;
-                            
+                    }
+                    
                     var _strict = false,
-                    	i = 0,
-                    	pos = 0,
-                    	c = '',
-                    	token = '',
-                    	x, 
-                    	y,
-	                    now = new Date(),
-	                    year = now.getYear(),
-	                    month = now.getMonth() + 1,
-	                    date = 1,
-	                    hh = now.getHours(),
-	                    mm = now.getMinutes(),
-	                    ss = now.getSeconds(),
-	                    SSS = now.getMilliseconds(),
-	                    ampm = '';
+                        pos = 0,
+                        now = new Date(),
+                        year = now.getYear(),
+                        month = now.getMonth() + 1,
+                        date = 1,
+                        hh = now.getHours(),
+                        mm = now.getMinutes(),
+                        ss = now.getSeconds(),
+                        SSS = now.getMilliseconds(),
+                        ampm = '',
+                        monthName,
+                        dayName;
                     
                     while (i < format.length) {
                         token = '';
@@ -108,12 +114,12 @@
                                 y = 4;
                             }
                             year = getNumber(value, pos, x, y);
-                            if (year == null) {
+                            if (year === null) {
                                 return 0;
                             }
                             pos += year.length;
                             if (year.length == 2) {
-                                year = parseInt(year);
+                                year = parseInt(year, 10);
                                 if (year > 70) {
                                     year = 1900 + year;
                                 } else {
@@ -122,7 +128,8 @@
                             }
                         } else if (token == 'MMMM'){
                             month = 0;
-                            for (var j = 0, monthName; monthName = _locale.date.monthsFull[j]; j++) {
+                            for (j = 0, l = _locale.date.monthsFull.length; j < l; j++) {
+                                monthName = _locale.date.monthsFull[j];
                                 if (value.substring(pos, pos + monthName.length).toLowerCase() == monthName.toLowerCase()) {
                                     month = j + 1;
                                     pos += monthName.length;
@@ -134,7 +141,8 @@
                             }
                         } else if (token == 'MMM'){
                             month = 0;
-                            for (var j = 0, monthName; monthName = _locale.date.monthsShort[j]; j++) {
+                            for (j = 0, l = _locale.date.monthsShort.length; j < l; j++) {
+                                monthName = _locale.date.monthsShort[j];
                                 if (value.substring(pos, pos + monthName.length).toLowerCase() == monthName.toLowerCase()) {
                                     month = j + 1;
                                     pos += monthName.length;
@@ -145,14 +153,16 @@
                                 return 0;
                             }
                         } else if (token == 'EEEE'){
-                            for (var j = 0, dayName; dayName = _locale.date.daysFull[j]; j++) {
+                            for (j = 0, l = _locale.date.daysFull.length; j < l; j++) {
+                                dayName = _locale.date.daysFull[j];
                                 if (value.substring(pos, pos + dayName.length).toLowerCase() == dayName.toLowerCase()) {
                                     pos += dayName.length;
                                     break;
                                 }
                             }        
                         } else if (token == 'EEE'){
-                            for (var j = 0, dayName; dayName = _locale.date.daysShort[j]; j++) {
+                            for (j = 0, l =_locale.date.daysShort.length; j < l; j++) {
+                                dayName = _locale.date.daysShort[j];
                                 if (value.substring(pos, pos + dayName.length).toLowerCase() == dayName.toLowerCase()) {
                                     pos += dayName.length;
                                     break;
@@ -160,56 +170,56 @@
                             }
                         } else if (token == 'MM' || token == 'M') {
                             month = getNumber(value, pos, _strict ? token.length : 1, 2);
-                            if (month == null || (month < 1) || (month > 12)){
+                            if (month === null || (month < 1) || (month > 12)){
                                 return 0;
                             }
                             pos += month.length;
                         } else if (token == 'dd' || token == 'd') {
                             date = getNumber(value, pos, _strict ? token.length : 1, 2);
-                            if (date == null || (date < 1) || (date > 31)){
+                            if (date === null || (date < 1) || (date > 31)){
                                 return 0;
                             }
                             pos += date.length;
                         } else if (token == 'hh' || token == 'h') {
                             hh = getNumber(value, pos, _strict ? token.length : 1, 2);
-                            if (hh == null || (hh < 1) || (hh > 12)) {
+                            if (hh === null || (hh < 1) || (hh > 12)) {
                                 return 0;
                             }
                             pos += hh.length;
                         } else if (token == 'HH' || token == 'H') {
                             hh = getNumber(value, pos, _strict ? token.length : 1, 2);
-                            if(hh == null || (hh < 0) || (hh > 23)){
+                            if(hh === null || (hh < 0) || (hh > 23)){
                                 return 0;
                             }
                             pos += hh.length;
                         } else if (token == 'KK' || token == 'K') {
                             hh = getNumber(value, pos, _strict ? token.length : 1, 2);
-                            if (hh == null || (hh < 0) || (hh > 11)){
+                            if (hh === null || (hh < 0) || (hh > 11)){
                                 return 0;
                             }
                             pos += hh.length;
                         } else if (token == 'kk' || token == 'k') {
                             hh = getNumber(value, pos, _strict ? token.length : 1, 2);
-                            if (hh == null || (hh < 1) || (hh > 24)){
+                            if (hh === null || (hh < 1) || (hh > 24)){
                                 return 0;
                             }
                             pos += hh.length;
                             hh--;
                         } else if (token == 'mm' || token == 'm') {
                             mm = getNumber(value, pos, _strict ? token.length : 1, 2);
-                            if (mm == null || (mm < 0) || ( mm > 59)) {
+                            if (mm === null || (mm < 0) || ( mm > 59)) {
                                 return 0;
                             }
                             pos += mm.length;
                         } else if (token == 'ss' || token == 's') {
                             ss = getNumber(value, pos, _strict ? token.length : 1, 2);
-                            if (ss == null || (ss < 0) || (ss > 59)){
+                            if (ss === null || (ss < 0) || (ss > 59)){
                                 return 0;
                             }
                             pos += ss.length;
                         } else if (token == 'SSS' || token == 'SS' || token == 'S') {
                             SSS = getNumber(value, pos, _strict ? token.length : 1, 3);
-                            if (SSS == null || (SSS < 0) || (SSS > 999)){
+                            if (SSS === null || (SSS < 0) || (SSS > 999)){
                                 return 0;
                             }
                             pos += SSS.length;
@@ -235,8 +245,8 @@
                         return 0;
                     }
                     if (month == 2) {
-                        if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) { // leap year
-                            if (date > 29){ 
+                        if (((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0)) {
+                            if (date > 29) { 
                                 return 0;
                             }
                         } else {
@@ -261,7 +271,7 @@
                 } else {
                     
                     var formatNumber = function (n, s) {
-                        if (typeof s == 'undefined' || s == 2) {
+                        if (typeof s == UNDEFINED || s == 2) {
                           return (n >= 0 && n < 10 ? '0' : '') + n;
                         } else {
                             if (n >= 0 && n < 10) {
@@ -278,100 +288,102 @@
                         format = _locale.date.format;
                     }
                     
-                    var y = value.getYear();
+                    y = value.getYear();
                     if (y < 1000) {
                         y = String(y + 1900);
                     }
                     
-                    var M = value.getMonth() + 1;
-                    var d = value.getDate();
-                    var E = value.getDay();
-                    var H = value.getHours();
-                    var m = value.getMinutes();
-                    var s = value.getSeconds();
-                    var S = value.getMilliseconds();
+                    var M = value.getMonth() + 1,
+                        d = value.getDate(),
+                        E = value.getDay(),
+                        H = value.getHours(),
+                        m = value.getMinutes(),
+                        s = value.getSeconds(),
+                        S = value.getMilliseconds();
+
+                    value = {
+                        y: y,
+                        yyyy: y,
+                        yy: String(y).substring(2, 4),
+                        M: M,
+                        MM: formatNumber(M),
+                        MMM: _locale.date.monthsShort[M-1],
+                        MMMM: _locale.date.monthsFull[M-1],
+                        d: d,
+                        dd: formatNumber(d),
+                        EEE: _locale.date.daysShort[E],
+                        EEEE: _locale.date.daysFull[E],
+                        H: H,
+                        HH: formatNumber(H)
+                    };
                     
-                    var value = new Object();
-                    value['y'] = y;
-                    value['yyyy'] = y;
-                    value['yy'] = String(y).substring(2, 4);
-                    value['M'] = M;
-                    value['MM'] = formatNumber(M);
-                    value['MMM'] = _locale.date.monthsShort[M-1];
-                    value['MMMM'] = _locale.date.monthsFull[M-1];
-                    value['d'] = d;
-                    value['dd'] = formatNumber(d);
-                    value['EEE'] = _locale.date.daysShort[E];
-                    value['EEEE'] = _locale.date.daysFull[E];
-                    value['H'] = H;
-                    value['HH'] = formatNumber(H);
-                    
-                    if (H == 0){
-                        value['h'] = 12;
-                    } else if (H > 12){
-                        value['h'] = H - 12;
+                    if (H === 0){
+                        value.h = 12;
+                    } else if (H > 12) {
+                        value.h = H - 12;
                     } else {
-                        value['h'] = H;
+                        value.h = H;
                     }
                     
-                    value['hh'] = formatNumber(value['h']);
-                    value['k'] = H + 1;
-                    value['kk'] = formatNumber(value['k']);
+                    value.hh = formatNumber(value.h);
+                    value.k = H + 1;
+                    value.kk = formatNumber(value.k);
                     
                     if (H > 11){
-                        value['K'] = H - 12;
+                        value.K = H - 12;
                     } else {
-                        value['K'] = H;
+                        value.K = H;
                     }
                     
-                    value['KK'] = formatNumber(value['K']);
+                    value.KK = formatNumber(value.K);
                     
                     if (H > 11) {
-                        value['a'] = 'PM';
+                        value.a = 'PM';
                     } else {
-                        value['a'] = 'AM';
+                        value.a = 'AM';
                     }
                     
-                    value['m'] = m;
-                    value['mm'] = formatNumber(m);
-                    value['s'] = s;
-                    value['ss'] = formatNumber(s);
-                    value['S'] = S;
-                    value['SS'] = formatNumber(S);
-                    value['SSS'] = formatNumber(S, 3);
+                    value.m = m;
+                    value.mm = formatNumber(m);
+                    value.s = s;
+                    value.ss = formatNumber(s);
+                    value.S = S;
+                    value.SS = formatNumber(S);
+                    value.SSS = formatNumber(S, 3);
                 
-                    var i = 0;
-                    var c = '';
-                    var token = '';
                     var result = '';
-                    var s = false;
+                        
+                    i = 0;
+                    c = '';
+                    token = '';
+                    s = false;
                     
                     while (i < format.length) {
                         token = '';   
                         c = format.charAt(i);
                         if (c == '\'') {
-                        	i++;
-                        	if (format.charAt(i) == c) {
-                        		result = result + c;
-                        		i++;
-                        	} else {
-                        		s = !s;
-                        	}
+                            i++;
+                            if (format.charAt(i) == c) {
+                                result = result + c;
+                                i++;
+                            } else {
+                                s = !s;
+                            }
                         } else {
-	                        while (format.charAt(i) == c) {
-	                            token += format.charAt(i++);
-	                        }
-	                        if (token.indexOf('MMMM') > - 1 && token.length > 4) {
-	                            token = 'MMMM';
-	                        }
-	                        if (token.indexOf('EEEE') > - 1 && token.length > 4) {
-	                            token = 'EEEE';
-	                        }
-	                        if (value[token] != null && !s) {
-	                            result = result + value[token];
-	                        } else {
-	                            result = result + token;
-	                        }
+                            while (format.charAt(i) == c) {
+                                token += format.charAt(i++);
+                            }
+                            if (token.indexOf('MMMM') != -1 && token.length > 4) {
+                                token = 'MMMM';
+                            }
+                            if (token.indexOf('EEEE') != -1 && token.length > 4) {
+                                token = 'EEEE';
+                            }
+                            if (typeof value[token] != UNDEFINED && !s) {
+                                result = result + value[token];
+                            } else {
+                                result = result + token;
+                            }
                         }
                     }
                     return result;                    
@@ -379,13 +391,21 @@
             },
             
             number: function(value, format) {
+
+                var groupingSeparator,
+                    groupingIndex,
+                    decimalSeparator,
+                    decimalIndex,
+                    roundFactor,
+                    i;
                 
                 if (typeof value == 'string') {
                     
-                    var groupingSeparator = _locale.number.groupingSeparator,
-                    	decimalSeparator = _locale.number.decimalSeparator,
-                    	decimalIndex = value.indexOf(decimalSeparator),
-                    	roundFactor = 1;
+                    groupingSeparator = _locale.number.groupingSeparator;
+                    decimalSeparator = _locale.number.decimalSeparator;
+                    decimalIndex = value.indexOf(decimalSeparator);
+                    
+                    roundFactor = 1;
                 
                     if (decimalIndex != -1) {
                         roundFactor = Math.pow(10, value.length - decimalIndex - 1);
@@ -394,7 +414,7 @@
                     value = value.replace(new RegExp('[' + groupingSeparator + ']', 'g'), '');
                     value = value.replace(new RegExp('[' + decimalSeparator + ']'), '.');
                     
-                    return (parseInt(value*roundFactor))/roundFactor;                    
+                    return (parseInt(value*roundFactor, 10))/roundFactor;                    
                     
                 } else {
                     
@@ -403,26 +423,27 @@
                     }
                     
                     var integer = '',
-                    	fraction = '',
-                    	groupingSeparator = ',',
-                    	groupingIndex = format.lastIndexOf(groupingSeparator),
-                    	decimalSeparator = '.',
-                    	decimalIndex = format.indexOf(decimalSeparator);
+                        fraction = '';
+                    
+                    groupingSeparator = ',';
+                    groupingIndex = format.lastIndexOf(groupingSeparator);
+                    decimalSeparator = '.';
+                    decimalIndex = format.indexOf(decimalSeparator);
         
                     if (decimalIndex != -1) {
-                        var fraction = _locale.number.decimalSeparator,
-                        	minFraction = format.substr(decimalIndex + 1).replace(/#/g, '').length,
-                        	maxFraction = format.substr(decimalIndex + 1).length;
+                        fraction = _locale.number.decimalSeparator;
+                        var minFraction = format.substr(decimalIndex + 1).replace(/#/g, '').length,
+                            maxFraction = format.substr(decimalIndex + 1).length;
                         if (maxFraction > 0) {
+                            roundFactor = 1000;
                             var powFraction = Math.pow(10, maxFraction),
-                            	roundFactor = 1000,
                                 tempRound = Math.round(parseInt(value * powFraction * roundFactor - 
-                                        Math.round(value) * powFraction * roundFactor) / roundFactor),
+                                        Math.round(value) * powFraction * roundFactor, 10) / roundFactor),
                                 tempFraction = String(tempRound < 0 ? Math.round(parseInt(value * powFraction * roundFactor - 
-                                        parseInt(value) * powFraction * roundFactor) / roundFactor) : tempRound),
-                            	parts = value.toString().split('.');
+                                        parseInt(value, 10) * powFraction * roundFactor, 10) / roundFactor) : tempRound),
+                                parts = value.toString().split('.');
                             if (typeof parts[1] != UNDEFINED) {
-                                for (var i = 0; i < parts[1].length; i++) {
+                                for (i = 0; i < parts[1].length; i++) {
                                     if (parts[1].substr(i, 1) == '0') {
                                         tempFraction = '0' + tempFraction;
                                     } else {
@@ -430,12 +451,12 @@
                                     }
                                 }
                             }
-                            for (var i = 0; i < (maxFraction - fraction.length); i++) {
+                            for (i = 0; i < (maxFraction - fraction.length); i++) {
                                 tempFraction += '0';
                             }
                             var symbol, 
-                            	formattedFraction = '';
-                            for (var i = 0; i < tempFraction.length; i++) {
+                                formattedFraction = '';
+                            for (i = 0; i < tempFraction.length; i++) {
                                 symbol = tempFraction.substr(i, 1);
                                 if (i >= minFraction && symbol == '0' && /^0*$/.test(tempFraction.substr(i+1))) {
                                     break;
@@ -449,14 +470,14 @@
                         }
                     }
                     
-                    if (decimalIndex != 0) {
+                    if (decimalIndex !== 0) {
                         if (fraction != '') {
                             integer = String(Math.floor(value));            
                         } else {
                             integer = String(Math.round(value));
                         }
                         var grouping = _locale.number.groupingSeparator,
-                        	groupingSize = 0;
+                            groupingSize = 0;
                         if (groupingIndex != -1) {
                             if (decimalIndex != -1) {
                                 groupingSize = decimalIndex - groupingIndex;
@@ -467,10 +488,10 @@
                         }
                         if (groupingSize > 0) {
                             var count = 0, 
-                            	formattedInteger = '',
-                            	i = integer.length;
+                                formattedInteger = '';
+                            i = integer.length;
                             while (i--) {
-                                if (count != 0 && count % groupingSize == 0) {
+                                if (count !== 0 && count % groupingSize === 0) {
                                     formattedInteger = grouping + formattedInteger;    
                                 }
                                 formattedInteger = integer.substr(i, 1) + formattedInteger;
@@ -485,7 +506,7 @@
                             maxInteger = format.replace(new RegExp('#|' + grouping, 'g'), '').length;                
                         }
                         var tempInteger = integer.length;
-                        for (var i = tempInteger; i < maxInteger; i++) {
+                        for (i = tempInteger; i < maxInteger; i++) {
                             integer = '0' + integer;
                         }                
                     }
