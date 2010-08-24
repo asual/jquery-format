@@ -7,7 +7,7 @@
  * Dual licensed under the MIT or GPL Version 2 licenses.
  * http://jquery.org/license
  *
- * Date: 2010-03-20 22:17:09 +0200 (Sat, 20 Mar 2010)
+ * Date: 2010-08-18 16:42:01 +0300 (Wed, 18 Aug 2010)
  */
 (function ($) {
 
@@ -423,8 +423,10 @@
                     }
                     
                     var integer = '',
-                        fraction = '';
+                        fraction = '',
+                        negative = value < 0;
                     
+                    value = Math.abs(value);
                     groupingSeparator = ',';
                     groupingIndex = format.lastIndexOf(groupingSeparator);
                     decimalSeparator = '.';
@@ -511,7 +513,7 @@
                         }                
                     }
                     result = integer + fraction;
-                    return result;                    
+                    return (negative ? '-' : '') + result;                    
                 }
             }
         };        
