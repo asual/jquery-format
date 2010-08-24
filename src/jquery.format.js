@@ -423,8 +423,10 @@
                     }
                     
                     var integer = '',
-                        fraction = '';
+                        fraction = '',
+                        negative = value < 0;
                     
+                    value = Math.abs(value);
                     groupingSeparator = ',';
                     groupingIndex = format.lastIndexOf(groupingSeparator);
                     decimalSeparator = '.';
@@ -511,7 +513,7 @@
                         }                
                     }
                     result = integer + fraction;
-                    return result;                    
+                    return (negative ? '-' : '') + result;                    
                 }
             }
         };        
