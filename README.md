@@ -1,13 +1,11 @@
-jQuery Format
-=============
+# jQuery Format
 
 The jQuery Format plugin enables the formatting and parsing of dates and numbers. It's a 
 client-side alternative of the popular 
 [SimpleDateFormat](http://java.sun.com/javase/6/docs/api/java/text/SimpleDateFormat.html) 
 and [NumberFormat](http://java.sun.com/javase/6/docs/api/java/text/NumberFormat.html) APIs.
 
-Usage
------
+## Usage
 
 Formatting dates and numbers is as easy as the following:
 
@@ -39,3 +37,15 @@ of the en_US locale. The locale can be globally configured using the following:
             decimalSeparator: '.'
         }    
     });
+
+## Changes
+
+### 09/26/2010 - jQuery Format 1.1
+
+- Issue 3: Issue on rounding.
+- Issue 2: A semicolon is missing line 275.
+- Issue 1: Issue with number format #.## (or more).
+
+### 12/23/2009 - jQuery Format 1.0
+
+Initial release.
