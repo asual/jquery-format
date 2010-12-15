@@ -445,8 +445,8 @@
                                         parseInt(value, 10) * powFraction * roundFactor, 10) / roundFactor) : tempRound),
                                 parts = value.toString().split('.');
                             if (typeof parts[1] != UNDEFINED) {
-                                for (i = 0; i < parts[1].length; i++) {
-                                    if (parts[1].substr(i, 1) == '0') {
+                                for (i = 0; i < maxFraction; i++) {
+                                    if (parts[1].substr(i, 1) == '0' && i < maxFraction - 1) {
                                         tempFraction = '0' + tempFraction;
                                     } else {
                                         break;
