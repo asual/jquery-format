@@ -40,6 +40,10 @@ of the en_US locale. The locale can be globally configured using the following:
 
 ## Changes
 
+### 12/14/2010 - jQuery Format 1.2
+
+- Fixed issue with fraction formatting.
+
 ### 09/26/2010 - jQuery Format 1.1
 
 - Issue 3: Issue on rounding.
