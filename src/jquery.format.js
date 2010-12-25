@@ -18,14 +18,13 @@
             FALSE = false,
             _locale = {
                 date: {
-                    format: 'dddd, MMMM dd, yyyy h:mm:ss tt',
+                    format: 'MMM dd, yyyy h:mm:ss a',
                     monthsFull: ['January','February','March','April','May','June','July','August','September','October','November','December'],
                     monthsShort: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
                     daysFull: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
                     daysShort: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
-                    timeFormat: 'h:mm tt',
-                    shortDateFormat: 'M/d/yyyy',
-                    longDateFormat: 'dddd, MMMM dd, yyyy'
+                    shortDateFormat: 'M/d/yyyy h:mm a',
+                    longDateFormat: 'EEEE, MMMM dd, yyyy h:mm:ss a'
                 },
                 number: {
                     format: '#,##0.0#',
@@ -317,7 +316,7 @@
                         HH: formatNumber(H)
                     };
                     
-                    if (H === 0){
+                    if (H === 0) {
                         value.h = 12;
                     } else if (H > 12) {
                         value.h = H - 12;
@@ -326,10 +325,10 @@
                     }
                     
                     value.hh = formatNumber(value.h);
-                    value.k = H + 1;
+                    value.k = H !== 0 ? H : 24;
                     value.kk = formatNumber(value.k);
                     
-                    if (H > 11){
+                    if (H > 11) {
                         value.K = H - 12;
                     } else {
                         value.K = H;
