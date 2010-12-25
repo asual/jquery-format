@@ -12,6 +12,24 @@ test("Basic requirements", function() {
     d = new Date(df);
     equals($.format.date(d, f), '01.05.2009');
     
+    d = new Date();
+    d.setHours(0);
+    d.setMinutes(0);
+    f = 'h:mm a';
+    equals($.format.date(d, f), '12:00 AM');
+    
+    d = new Date();
+    d.setHours(0);
+    d.setMinutes(0);
+    f = 'k:mm a';
+    equals($.format.date(d, f), '24:00 AM');
+    
+    d = new Date();
+    d.setHours(12);
+    d.setMinutes(0);
+    f = 'k:mm a';
+    equals($.format.date(d, f), '12:00 PM');
+    
     $.format.locale({
         date: {
             format: 'EEEE, \'o\'\'clock\' dd\' de \'MMMM\' de \'yyyy H:mm:ss',
