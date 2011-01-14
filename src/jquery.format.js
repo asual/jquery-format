@@ -421,24 +421,26 @@
                         format = _locale.number.format;
                     }
                     
-                    var integer = '',
-                        fraction = '',
-                        negative = value < 0;
-                    
-                    value = Math.abs(value);
                     groupingSeparator = ',';
                     groupingIndex = format.lastIndexOf(groupingSeparator);
                     decimalSeparator = '.';
                     decimalIndex = format.indexOf(decimalSeparator);
+                    
+                    var integer = '',
+                        fraction = '',
+                        negative = value < 0,
+                        minFraction = format.substr(decimalIndex + 1).replace(/#/g, '').length,
+                        maxFraction = format.substr(decimalIndex + 1).length,
+                        powFraction = 10;
+                        
+                    value = Math.abs(value);
         
                     if (decimalIndex != -1) {
                         fraction = _locale.number.decimalSeparator;
-                        var minFraction = format.substr(decimalIndex + 1).replace(/#/g, '').length,
-                            maxFraction = format.substr(decimalIndex + 1).length;
                         if (maxFraction > 0) {
                             roundFactor = 1000;
-                            var powFraction = Math.pow(10, maxFraction),
-                                tempRound = Math.round(parseInt(value * powFraction * roundFactor - 
+                            powFraction = Math.pow(powFraction, maxFraction);
+                            var tempRound = Math.round(parseInt(value * powFraction * roundFactor - 
                                         Math.round(value) * powFraction * roundFactor, 10) / roundFactor),
                                 tempFraction = String(tempRound < 0 ? Math.round(parseInt(value * powFraction * roundFactor - 
                                         parseInt(value, 10) * powFraction * roundFactor, 10) / roundFactor) : tempRound),
@@ -473,7 +475,7 @@
                     
                     if (decimalIndex !== 0) {
                         if (fraction != '') {
-                            integer = String(Math.floor(value));            
+                            integer = String(parseInt(Math.round(value * powFraction) / powFraction, 10));
                         } else {
                             integer = String(Math.round(value));
                         }
