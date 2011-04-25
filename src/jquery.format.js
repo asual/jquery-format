@@ -447,7 +447,7 @@
                                 parts = value.toString().split('.');
                             if (typeof parts[1] != UNDEFINED) {
                                 for (i = 0; i < maxFraction; i++) {
-                                    if (parts[1].substr(i, 1) == '0' && i < maxFraction - 1) {
+                                    if (parts[1].substr(i, 1) == '0' && i < maxFraction - 1 && (tempFraction.length != maxFraction || tempFraction.substr(0, 1) == '0')) {
                                         tempFraction = '0' + tempFraction;
                                     } else {
                                         break;
