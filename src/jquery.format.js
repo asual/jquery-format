@@ -396,6 +396,7 @@
                     decimalSeparator,
                     decimalIndex,
                     roundFactor,
+                    result,
                     i;
                 
                 if (typeof value == 'string') {
