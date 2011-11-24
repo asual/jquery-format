@@ -414,7 +414,7 @@
                     value = value.replace(new RegExp('[' + groupingSeparator + ']', 'g'), '');
                     value = value.replace(new RegExp('[' + decimalSeparator + ']'), '.');
                     
-                    return (parseInt(value*roundFactor, 10))/roundFactor;                    
+                    return Math.round(value*roundFactor)/roundFactor;                    
                     
                 } else {
                     

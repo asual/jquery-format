@@ -98,6 +98,7 @@ test("Basic requirements", function() {
     equals($.format.number('.1230'), 0.123);
     equals($.format.number('86.02'), 86.02);
     equals($.format.number('03.14'), 3.14);
+    equals($.format.number('64.21'), 64.21);
 
     $.format.locale({
         number: {
@@ -114,6 +115,7 @@ test("Basic requirements", function() {
     
     equals($.format.number('1.231.231.212,3241'), 1231231212.3241);
     equals($.format.number('18,00.5'), 18.005);
+    equals($.format.number('71,49'), 71.49);
     
     equals($.format.number(99.9999, '#,##0.0'), '100,0');
     equals($.format.number(99.9999, '#,##0.000'), '100,000');
@@ -126,7 +128,7 @@ test("Basic requirements", function() {
     equals($.format.number(99.8999, '#,##0.00'), '99,90');
     equals($.format.number(99.9444, '#,##0.00'), '99,94');
     equals($.format.number(99.9454, '#,##0.00'), '99,95');
-    equals($.format.number(99.9944, '#,##0.00'), '99,99');    
+    equals($.format.number(99.9944, '#,##0.00'), '99,99');
     
     $.format.locale({
         number: {
