@@ -75,7 +75,7 @@
                     
                     var _strict = false,
                         pos = 0,
-                        now = new Date(),
+                        now = new Date(0, 0, 0, 0, 0, 0, 0),
                         year = now.getYear(),
                         month = now.getMonth() + 1,
                         date = 1,
