@@ -29,7 +29,8 @@
                 number: {
                     format: '#,##0.0#',
                     groupingSeparator: ',',
-                    decimalSeparator: '.'
+                    decimalSeparator: '.',
+                    prefix: ''
                 }
             };
        
@@ -514,8 +515,10 @@
                             integer = '0' + integer;
                         }                
                     }
+                    var prefix = _locale.number.prefix;
                     result = integer + fraction;
-                    return (negative ? '-' : '') + result;                    
+                    result = (negative ? '-' : '') + result;                    
+                    return (prefix != '' ? prefix + ' ' + result : result);
                 }
             }
         };        
