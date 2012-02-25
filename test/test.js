@@ -30,6 +30,15 @@ test("Basic requirements", function() {
     f = 'k:mm a';
     equals($.format.date(d, f), '12:00 PM');
     
+    d = new Date();
+    d.setFullYear(2012);
+    d.setMonth(1);
+    d.setDate(22);
+    d.setHours(0);
+    d.setMinutes(0);
+    d.setSeconds(0);
+    equals($.format.date('2012-02-22', 'yyyy-MM-dd').toString(), d.toString());
+    
     $.format.locale({
         date: {
             format: 'EEEE, \'o\'\'clock\' dd\' de \'MMMM\' de \'yyyy H:mm:ss',
