@@ -292,13 +292,15 @@
                         y = String(y + 1900);
                     }
                     
+                    var ordinals = { 1:  "st", 2:  "nd", 3:  "rd", 21: "st", 22: "nd", 23: "rd", 31: "st" };
                     var M = value.getMonth() + 1,
                         d = value.getDate(),
                         E = value.getDay(),
                         H = value.getHours(),
                         m = value.getMinutes(),
                         s = value.getSeconds(),
-                        S = value.getMilliseconds();
+                        S = value.getMilliseconds(),
+                        o = ordinals[d] || "th";
 
                     value = {
                         y: y,
@@ -313,9 +315,11 @@
                         EEE: _locale.date.daysShort[E],
                         EEEE: _locale.date.daysFull[E],
                         H: H,
-                        HH: formatNumber(H)
+                        HH: formatNumber(H),
+                        o: o,
+                        O: o.toUpperCase()
                     };
-                    
+
                     if (H === 0) {
                         value.h = 12;
                     } else if (H > 12) {
