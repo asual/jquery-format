@@ -31,6 +31,46 @@ test("Basic requirements", function() {
     equals($.format.date(d, f), '12:00 PM');
     
     d = new Date();
+    d.setDate(1);
+    f = 'do dO';
+    equals($.format.date(d, f), '1st 1ST');
+
+    d = new Date();
+    d.setDate(2);
+    f = 'do dO';
+    equals($.format.date(d, f), '2nd 2ND');
+
+    d = new Date();
+    d.setDate(3);
+    f = 'do dO';
+    equals($.format.date(d, f), '3rd 3RD');
+
+    d = new Date();
+    d.setDate(4);
+    f = 'do dO';
+    equals($.format.date(d, f), '4th 4TH');
+
+    d = new Date();
+    d.setDate(21);
+    f = 'do dO';
+    equals($.format.date(d, f), '21st 21ST');
+
+    d = new Date();
+    d.setDate(22);
+    f = 'do dO';
+    equals($.format.date(d, f), '22nd 22ND');
+
+    d = new Date();
+    d.setDate(23);
+    f = 'do dO';
+    equals($.format.date(d, f), '23rd 23RD');
+
+    d = new Date();
+    d.setDate(31);
+    f = 'do dO';
+    equals($.format.date(d, f), '31st 31ST');
+
+    d = new Date();
     d.setFullYear(2012);
     d.setMonth(1);
     d.setDate(22);
