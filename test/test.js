@@ -152,6 +152,7 @@ test("Basic requirements", function() {
     equals($.format.number(12.32410, '#,##0.0000#'), '12.3241');
     equals($.format.number(2123.4, '#,##0.000'), "2'123.400");
     equals($.format.number(1231231212.32410, '#,##0.0000#'), "1'231'231'212.3241");
+    equals($.format.number(1.2, "#,##0.#"), '1.2');
     
     equals($.format.number("1'231'231'212.3241"), 1231231212.3241);
     equals($.format.number("18.00'5"), 18.005);
