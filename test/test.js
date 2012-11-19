@@ -1,3 +1,10 @@
+module("Boolean");
+
+test("Basic requirements", function() {
+    equals($.format.bool(true), 'Yes');
+    equals($.format.bool(false), 'No');
+});
+
 module("Dates");
 
 test("Basic requirements", function() {

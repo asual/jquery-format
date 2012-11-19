@@ -25,12 +25,16 @@
                     daysFull: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
                     daysShort: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
                     shortDateFormat: 'M/d/yyyy h:mm a',
-                    longDateFormat: 'EEEE, MMMM dd, yyyy h:mm:ss a'
+                    longDateFormat: 'EEEE, MMMM dd, yyyy h:mm:ss a',
                 },
                 number: {
                     format: '#,##0.0#',
                     groupingSeparator: ',',
                     decimalSeparator: '.'
+                },
+                bool: {
+                    trueValue: 'Yes',
+                    falseValue: 'No'
                 }
             };
 
@@ -46,6 +50,15 @@
                     }
                 }
                 return _locale;
+            },
+            
+            bool: function(value) {
+                if (value) {
+                    return _locale.bool.trueValue;
+                }
+                else {
+                    return _locale.bool.falseValue;
+                }
             },
 
             date: function(value, format) {
