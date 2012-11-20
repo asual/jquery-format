@@ -11,11 +11,13 @@ Formatting dates and numbers is as easy as the following:
 
     $.format.date(new Date(), 'MMMM dd, yyyy KK:mm:ss:SSS a');
     $.format.number(7456.2, '#,##0.00#');
+    $.format.bool(true);
     
 Parsing is very similar to the formatting but works with strings as a first parameter:
 
     $.format.date('1.5.2009', 'dd.MM.yyyy');
     $.format.number('1.231.231.212,3241');
+    $.format.bool('True');
     
 The second format parameter is always optional and by default the plugin uses the formats 
 of the en_US locale. The locale can be globally configured using the following:
@@ -35,10 +37,19 @@ of the en_US locale. The locale can be globally configured using the following:
             format: '#,##0.0#',
             groupingSeparator: ',',
             decimalSeparator: '.'
-        }    
+        },
+        bool: {
+            trueString: ['true', 'yes'],
+            falseString: ['false', 'no'],
+            trueValue: 'Yes',
+            falseValue: 'No'
+        }        
     });
 
 ## Changes
+### 11/20/2012 - jQuery Format 1.3
+
+- Added support for boolean formatting
 
 ### 11/24/2011 - jQuery Format 1.2
 
