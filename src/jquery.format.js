@@ -33,6 +33,8 @@
                     decimalSeparator: '.'
                 },
                 bool: {
+                    trueString: ['true', 'yes'],
+                    falseString: ['false', 'no'],
                     trueValue: 'Yes',
                     falseValue: 'No'
                 }
@@ -53,6 +55,16 @@
             },
             
             bool: function(value) {
+                if (typeof value === 'string') {
+                    value = value.toLowerCase();
+                    if (_locale.bool.trueString.indexOf(value) > -1) {
+                        value = true;
+                    }
+                    else if (_locale.bool.falseString.indexOf(value) > -1) {
+                        value = false;
+                    }
+                }
+            
                 if (value) {
                     return _locale.bool.trueValue;
                 }

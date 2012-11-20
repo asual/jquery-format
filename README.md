@@ -11,6 +11,7 @@ Formatting dates and numbers is as easy as the following:
 
     $.format.date(new Date(), 'MMMM dd, yyyy KK:mm:ss:SSS a');
     $.format.number(7456.2, '#,##0.00#');
+    $.format.bool(true);
     
 Parsing is very similar to the formatting but works with strings as a first parameter:
 

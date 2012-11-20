@@ -3,6 +3,16 @@ module("Boolean");
 test("Basic requirements", function() {
     equals($.format.bool(true), 'Yes');
     equals($.format.bool(false), 'No');
+    equals($.format.bool('True'), 'Yes');
+    equals($.format.bool('false'), 'No');
+    equals($.format.bool('Yes'), 'Yes');
+    equals($.format.bool('no'), 'No');
+    equals($.format.bool('something'), 'Yes');
+    equals($.format.bool(''), 'No');
+    equals($.format.bool(null), 'No');
+    equals($.format.bool(undefined), 'No');
+    equals($.format.bool(0), 'No');
+    equals($.format.bool(1), 'Yes');
 });
 
 module("Dates");
