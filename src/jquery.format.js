@@ -13,6 +13,19 @@
 
     $.format = (function () {
 
+        // The function is used instead of Array.prototype.indexOf to make the code
+        // compatible with IE 6/7
+        var contains = function(array, value) {
+            var i;
+            for (i in array) {
+                if (array[i] === value) {
+                    return true;
+                }
+            }
+            
+            return false;
+        };
+        
         var UNDEFINED = 'undefined',
             TRUE = true,
             FALSE = false,
@@ -57,10 +70,10 @@
             bool: function(value) {
                 if (typeof value === 'string') {
                     value = value.toLowerCase();
-                    if (_locale.bool.trueString.indexOf(value) > -1) {
+                    if (contains(_locale.bool.trueString, value)) {
                         value = true;
                     }
-                    else if (_locale.bool.falseString.indexOf(value) > -1) {
+                    else if (contains(_locale.bool.falseString, value)) {
                         value = false;
                     }
                 }
