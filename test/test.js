@@ -89,6 +89,9 @@ test("Basic requirements", function() {
     equals($.format.number(5.1001, '#,##0.000'), '5.100');
     equals($.format.number(1, "#,##0.00"), '1.00');
     equals($.format.number(1.2, "#,##0.#"), '1.2');
+    equals($.format.number(0.0098, "0.000"), '0.010');
+    equals($.format.number(0.00098, "0.0000"), '0.0010');
+    equals($.format.number(0.000098, "0.0000#"), '0.0001');
 
     equals($.format.number(23540.23, '#,###.##'), '23,540.23');
     equals($.format.number(23540.23, '#,###'), '23,540');
