@@ -30,8 +30,9 @@
     </target>
     
     <target name="dist">
+        <mkdir dir="${dist.dir}" />
         <echo message="Cleaning dist..." />
-        <delete includeemptydirs="true" failonerror="false">
+        <delete includeemptydirs="true">
             <fileset dir="${dist.dir}" includes="**/*" />
         </delete>
         <echo message="Validating files..." />
