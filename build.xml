@@ -31,7 +31,7 @@
     
     <target name="dist">
         <echo message="Cleaning dist..." />
-        <delete includeemptydirs="true">
+        <delete includeemptydirs="true" failonerror="false">
             <fileset dir="${dist.dir}" includes="**/*" />
         </delete>
         <echo message="Validating files..." />
