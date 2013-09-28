@@ -40,18 +40,24 @@ of the en_US locale. The locale can be globally configured using the following:
 
 ## Changes
 
+### 09/28/2013 - jQuery Format 1.3
+
+- Issue 14: Incorrectly rounding up at 3 decimals
+- Issue 9: Function 'date' should not use current time
+- Various minor fixes
+
 ### 11/24/2011 - jQuery Format 1.2
 
 - Issue 8: Parsing string
 - Issue 5: Decimal rounding
-- Fixed issue with fraction formatting.
+- Fixed issue with fraction formatting
 
 ### 09/26/2010 - jQuery Format 1.1
 
-- Issue 3: Issue on rounding.
-- Issue 2: A semicolon is missing line 275.
-- Issue 1: Issue with number format #.## (or more).
+- Issue 3: Issue on rounding
+- Issue 2: A semicolon is missing line 275
+- Issue 1: Issue with number format #.## (or more)
 
 ### 12/23/2009 - jQuery Format 1.0
 
-Initial release.
+Initial release
