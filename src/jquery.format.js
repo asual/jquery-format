@@ -14,8 +14,6 @@
     $.format = (function () {
 
         var UNDEFINED = 'undefined',
-            TRUE = true,
-            FALSE = false,
             _locale = {
                 date: {
                     format: 'MMM dd, yyyy h:mm:ss a',
@@ -37,7 +35,6 @@
         return {
 
             locale: function(value) {
-                a = {a: 6};
                 if (value) {
                     for (var p in value) {
                         for (var v in value[p]) {
@@ -54,17 +51,15 @@
                     j = 0,
                     l = 0,
                     c = '',
-                    token = '',
-                    x,
                     y;
 
                 if (typeof value == 'string') {
 
                     var getNumber = function (str, p, minlength, maxlength) {
-                        for (var x = maxlength; x >= minlength; x--) {
-                            var token = str.substring(p, p + x);
-                            if (token.length >= minlength && /^\d+$/.test(token)) {
-                                return token;
+                        for (var x1 = maxlength; x1 >= minlength; x1--) {
+                            var token1 = str.substring(p, p + x1);
+                            if (token1.length >= minlength && /^\d+$/.test(token1)) {
+                                return token1;
                             }
                         }
                         return null;
@@ -86,10 +81,11 @@
                         SSS = now.getMilliseconds(),
                         ampm = '',
                         monthName,
-                        dayName;
+                        dayName,
+                        x;
 
                     while (i < format.length) {
-                        token = '';
+                        var token = '';
                         c = format.charAt(i);
                         while ((format.charAt(i) == c) && (i < format.length)) {
                             token += format.charAt(i++);
@@ -270,8 +266,8 @@
 
                 } else {
 
-                    var formatNumber = function (n, s) {
-                        if (typeof s == UNDEFINED || s == 2) {
+                    var formatNumber = function (n, s1) {
+                        if (typeof s1 == UNDEFINED || s1 == 2) {
                           return (n >= 0 && n < 10 ? '0' : '') + n;
                         } else {
                             if (n >= 0 && n < 10) {
