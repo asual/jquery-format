@@ -1,0 +1,18 @@
+{
+  "name": "jquery-format",
+  "description": "The jQuery Format plugin enables the formatting and parsing of dates and numbers.",
+  "version": "1.3.0",
+  "author": "Rostislav Hristov",
+  "license": "MIT",
+  "main": "./src/jquery.format.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/asual/jquery-format"
+  },
+  "bugs": {
+    "url": "https://github.com/asual/jquery-format/issues"
+  },
+  "keywords": [
+    "format"
+  ]
+}
