@@ -22,20 +22,20 @@ of the en_US locale. The locale can be globally configured using the following:
 
     $.format.locale({
         date: {
-            format: 'dddd, MMMM dd, yyyy h:mm:ss tt',
-            monthsFull: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+            format: 'MMM dd, yyyy h:mm:ss a',
+            monthsFull: ['January','February','March','April','May','June',
+                    'July','August','September','October','November','December'],
             monthsShort: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
             daysFull: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
             daysShort: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
-            timeFormat: 'h:mm tt',
-            shortDateFormat: 'M/d/yyyy',
-            longDateFormat: 'dddd, MMMM dd, yyyy'
+            shortDateFormat: 'M/d/yyyy h:mm a',
+            longDateFormat: 'EEEE, MMMM dd, yyyy h:mm:ss a'
         },
         number: {
             format: '#,##0.0#',
             groupingSeparator: ',',
             decimalSeparator: '.'
-        }    
+        }
     });
 
 ## Changes
