@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/jquery-format.svg)](https://badge.fury.io/js/jquery-format)
+
 # jQuery Format
 
 The jQuery Format plugin enables the formatting and parsing of dates and numbers. It's a 
